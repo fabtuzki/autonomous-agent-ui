@@ -1,0 +1,9 @@
+1. Personality should have some default setting when creating an agent, or an option to skip. Do not allow the user to write their own personality.
+2. For step 3 when creating an agent - add mcp/tools, list out defaults some skills and mcp available to add. The MCP addition should have some warnings about adding personal token later to make the MCP works. 
+3. Heartbeat addition step should allow to config the time interval for the agent to wake up and check in. Default is 1 hour. Also a default prompt of the objective when the agent wakes up. 
+4. Channel addition step when creating a new agent should be removed.
+5. Split the module MCP and skills into 2 separate tabs. MCP addition should be selection based on the default list of MCPs (like toggling on/off). Skills addition should stay the same as it is now. 
+6. The decision log should displays the metadata surrounding the job creation including the chat context when it receives the order, and the job initiation, time scheduled in a separate tab.
+7. The job displays should show the job status (running, completed, failed), the job start time, the job end time, and the job duration in the job details drop down. 
+8. Modify the icons, padding, and margin of the buttons and tabs to make them more sleek and modern. 
+9. Utilize the UX Pro skills to make small adjustments to the UI to make it more intuitive and user-friendly. 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1136 1085">
+  <defs>
+    <style>
+      .st0 {
+        fill: #C020EE; /* Top face - Maximum VIBRANT Magenta/Purple */
+      }
+
+      .st1 {
+        fill: #2200EE; /* Bottom face - DEEP Electric Royal Blue */
+      }
+
+      .st2 {
+        fill: #9F16E8; /* Left Depth Facet - Saturated Violet Shadow */
+      }
+
+      .st3 {
+        fill: #1900CE; /* Right Depth Facet - Deep Cobalt Shadow */
+      }
+
+      .st4 {
+        fill: #391AEF; /* Middle face - Vivid Blue-Violet */
+      }
+
+      .st5 {
+        fill: #7D4EF0; /* Upper-mid transition layer */
+      }
+    </style>
+  </defs>
+  <g id="Layer_3">
+    <polygon class="st5" points="254 500 409 594 582.5 481 756 594 911 499 911 573 756 666 582.5 560 409 666 254 573.5 254 500"/>
+    <polygon class="st4" points="254 621 409 715 582.5 602 756 715 911 620 911 694 756 787 582.5 681 409 787 254 694.5 254 621"/>
+    <polygon class="st1" points="254 747 409 841 582.5 728 756 841 911 746 911 820 756 913 582.5 807 409 913 254 820.5 254 747"/>
+  </g>
+  <g id="Layer_2">
+    <polygon class="st0" points="406 172 254 271 428 379 254 485 409 581 583 468 757 581 911 485 738 376.5 911 270 755 172 582.5 281 406 172"/>
+    <polygon class="st2" points="254 285 254 355 350 414 409 376.5 254 285"/>
+    <polygon class="st3" points="911 285 911 355 815 414 756 376.5 911 285"/>
+  </g>
+</svg>

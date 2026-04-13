@@ -1,0 +1,47 @@
+The general context for this application is to create, update, and interact with an autonomous agent. The model should be 1 agent - 1 session.
+The navigation bar should be vertical. 
+Since this whole autonomous agent application is a nested single module in a bigger application, the navigation bar of the autonomous agent app should be compact and not take too much space. 
+Add a placeholder navigation bar to the left of the screen to mimic the navigation bar of the bigger application.
+
+I expect you to have a full description and a rationale behind  every single elements in the UI. Strictly adhering to the following structure:
+The first flow is to create an agent, with the following steps: 
+1. Name it, choose a model.
+2. Choose an agent personality (Or skip it)
+3. Add skills/MCP (like hands/legs for the agent) (optional). If the user add the MCP, later the user needs to come back to the screen MCP management to add credentials. 
+4. Add heartbeat (allow to add prompt for the agent what to do when wake up)
+5. Add channel (optional - add Teams)
+6. Start chatting.
+
+The second flow is to create a new skill for an agent: 
+1. There should be a screen displaying all the skills and MCPs
+2. A button to create new skill
+3. Then redirect the user to the chat with a prefix pre-typed /addnewskill on the typing box 
+4. The agent then instructs the users to describe the skill
+
+The third flow is to delete a skill/MCP:
+1. Choose a skill from Skill & MCP management screen (so you need to create a screen to manage skill & MCP, maybe 2 screens) 
+2. Delete 
+
+The forth flow is to add MCP credentials:
+1. Choose an MCP from Skill & MCP management screen
+2. Click on Add Personal Token
+3. There should be a tooltip, clicking on it should explain how to get the personal token for that MCP 
+
+The fifth flow is to add/remove channel:
+1. We only have Teams as additional channel, so just have a button to add Teams
+2. Allow to remove teams as a channel 
+
+The sixth flow is to chat with an agent:
+1. it's a chatbox with the agent
+2. allow user to navigate to agent configuration screen where user can manage MCP/Skill/jobs/channels
+
+The last flow is to manage the jobs that the agent set:
+1. Listing all the current job of the agents
+2. Click on the job to see history of decision logs 
+3. Click on the job to see the setting of the job
+4. Allow to delete the job
+5. Visual indicators for jobs failing
+
+
+
+

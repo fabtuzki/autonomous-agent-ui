@@ -1,0 +1,4 @@
+1. Display the status of the MCP whether a token is added or not. 
+2. Adopt the navigation bar of the bigger app based on the "example screen of the bigger app.jpg" file. The navigation bar of the bigger app should be collapsible into a thin vertical bar. 
+3. Modify the colors based on the logo.svg file. 
+4. Modify the UI according to the "example screen of the bigger app.jpg" file.
