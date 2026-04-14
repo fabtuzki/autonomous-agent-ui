@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, IconButton, Avatar, Collapse, Tooltip } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, IconButton, Avatar, Tooltip, useTheme } from '@mui/material';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -13,7 +13,7 @@ import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
 import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 
-// Inline SVG Logo for the exact xStudio brand look
+// Inline SVG Logo — brand asset, not theme-driven
 const LogoIcon = () => (
   <Box component="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1136 1085" sx={{ width: 28, height: 28, flexShrink: 0 }}>
     <g id="Layer_3">
@@ -31,6 +31,8 @@ const LogoIcon = () => (
 
 export default function GlobalNav() {
   const [expanded, setExpanded] = useState(true);
+  const theme = useTheme();
+  const m3 = theme.m3;
 
   const activeModule = 'Autonomous Agents';
 
@@ -49,37 +51,64 @@ export default function GlobalNav() {
   ];
 
   const renderNavGroup = (title, items) => (
-    <Box sx={{ mb: 2 }}>
+    <Box sx={{ mb: 1 }}>
       {expanded && (
-        <Typography variant="caption" sx={{ px: 3, mb: 1, display: 'block', color: 'text.secondary', fontWeight: 600 }}>
+        <Typography
+          variant="overline"
+          sx={{
+            px: 2, ml: 1, mb: 0.5, display: 'block',
+            color: m3.color.onSurfaceVariant,
+            fontWeight: 500,
+            fontSize: m3.typeScale.labelSmall.fontSize,
+            letterSpacing: m3.typeScale.labelSmall.letterSpacing,
+            lineHeight: m3.typeScale.labelSmall.lineHeight,
+          }}
+        >
           {title}
         </Typography>
       )}
       <List disablePadding>
         {items.map((item) => {
           const isActive = item.name === activeModule;
-          
+
           const listItem = (
-            <ListItem disablePadding key={item.name} sx={{ px: expanded ? 2 : 1, mb: 0.5 }}>
-              <ListItemButton 
-                sx={{ 
-                  borderRadius: 2, 
-                  py: 1,
+            <ListItem disablePadding key={item.name} sx={{ px: expanded ? 1.5 : 1, mb: 0.25 }}>
+              <ListItemButton
+                sx={{
+                  borderRadius: `${m3.shape.full}px`,
+                  py: 0.75,
                   px: expanded ? 2 : 1.5,
                   minHeight: 44,
-                  backgroundColor: isActive ? 'rgba(192, 32, 238, 0.06)' : 'transparent',
-                  color: isActive ? 'secondary.main' : 'text.secondary',
+                  backgroundColor: isActive ? m3.color.secondaryContainer : 'transparent',
+                  color: isActive ? m3.color.onSecondaryContainer : m3.color.onSurfaceVariant,
                   justifyContent: expanded ? 'flex-start' : 'center',
+                  transition: 'background-color 200ms ease-in-out',
                   '&:hover': {
-                    backgroundColor: isActive ? 'rgba(192, 32, 238, 0.1)' : 'rgba(0,0,0,0.04)'
-                  }
+                    backgroundColor: isActive
+                      ? m3.color.secondaryContainer
+                      : `rgba(103, 80, 164, ${m3.stateLayer.hover})`,
+                  },
                 }}
               >
-                <ListItemIcon sx={{ color: isActive ? 'secondary.main' : 'inherit', minWidth: expanded ? 40 : 'auto', mr: expanded ? 0 : 0 }}>
+                <ListItemIcon
+                  sx={{
+                    color: isActive ? m3.color.onSecondaryContainer : 'inherit',
+                    minWidth: expanded ? 36 : 'auto',
+                    mr: expanded ? 0 : 0,
+                    '& .MuiSvgIcon-root': { fontSize: 24 },
+                  }}
+                >
                   {item.icon}
                 </ListItemIcon>
                 {expanded && (
-                  <ListItemText primary={item.name} primaryTypographyProps={{ fontSize: '0.9rem', fontWeight: isActive ? 600 : 500 }} />
+                  <ListItemText
+                    primary={item.name}
+                    primaryTypographyProps={{
+                      fontSize: m3.typeScale.labelLarge.fontSize,
+                      fontWeight: isActive ? 600 : m3.typeScale.labelLarge.fontWeight,
+                      letterSpacing: m3.typeScale.labelLarge.letterSpacing,
+                    }}
+                  />
                 )}
               </ListItemButton>
             </ListItem>
@@ -87,7 +116,7 @@ export default function GlobalNav() {
 
           return expanded ? listItem : (
             <Tooltip title={item.name} placement="right" key={item.name}>
-               {listItem}
+              {listItem}
             </Tooltip>
           );
         })}
@@ -100,84 +129,101 @@ export default function GlobalNav() {
       sx={{
         width: expanded ? 260 : 72,
         flexShrink: 0,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: m3.color.surfaceContainerLowest,
         display: 'flex',
         flexDirection: 'column',
-        borderRight: '1px solid rgba(0,0,0,0.06)',
-        transition: 'width 0.2s ease',
+        borderRight: `1px solid ${m3.color.outlineVariant}`,
+        transition: 'width 200ms ease-in-out',
         zIndex: 10,
-        height: '100%'
+        height: '100%',
       }}
     >
       {/* Header */}
-      <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: expanded ? 'space-between' : 'center', height: 72 }}>
+      <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: expanded ? 'space-between' : 'center', height: 64 }}>
         {expanded && (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, pl: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, pl: 0.5 }}>
             <LogoIcon />
-            <Typography variant="h6" sx={{ color: 'secondary.main', fontWeight: 700, letterSpacing: '-0.5px' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: m3.color.primary,
+                fontWeight: 600,
+                letterSpacing: '-0.5px',
+                fontSize: m3.typeScale.titleLarge.fontSize,
+              }}
+            >
               xStudio
             </Typography>
           </Box>
         )}
         {!expanded && <LogoIcon />}
-        
+
         {expanded && (
-          <IconButton onClick={() => setExpanded(false)} size="small" sx={{ color: 'text.secondary', borderRadius: 1, border: '1px solid rgba(0,0,0,0.1)' }}>
+          <IconButton
+            onClick={() => setExpanded(false)}
+            size="small"
+            sx={{
+              color: m3.color.onSurfaceVariant,
+              borderRadius: m3.shape.small,
+              border: `1px solid ${m3.color.outlineVariant}`,
+              '&:hover': { backgroundColor: `rgba(103, 80, 164, ${m3.stateLayer.hover})` },
+            }}
+          >
             <KeyboardDoubleArrowLeftIcon fontSize="small" />
           </IconButton>
         )}
       </Box>
-      <Divider sx={{ mb: 2, borderColor: 'rgba(0,0,0,0.04)' }} />
+      <Divider sx={{ mb: 1.5 }} />
 
       {/* Main SCROLLABLE List Area */}
-      <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
+      <Box sx={{ flexGrow: 1, overflowY: 'auto', pt: 0.5 }}>
         <List disablePadding>
-          <ListItem disablePadding sx={{ px: expanded ? 2 : 1, mb: 2 }}>
-            <ListItemButton sx={{ borderRadius: 2, minHeight: 44, justifyContent: expanded ? 'flex-start' : 'center' }}>
-              <ListItemIcon sx={{ minWidth: expanded ? 40 : 'auto' }}><HomeOutlinedIcon /></ListItemIcon>
-              {expanded && <ListItemText primary="Home" primaryTypographyProps={{ fontSize: '0.9rem', fontWeight: 500 }}/>}
+          <ListItem disablePadding sx={{ px: expanded ? 1.5 : 1, mb: 1 }}>
+            <ListItemButton sx={{ borderRadius: `${m3.shape.full}px`, minHeight: 44, justifyContent: expanded ? 'flex-start' : 'center' }}>
+              <ListItemIcon sx={{ minWidth: expanded ? 36 : 'auto', '& .MuiSvgIcon-root': { fontSize: 24 } }}><HomeOutlinedIcon /></ListItemIcon>
+              {expanded && <ListItemText primary="Home" primaryTypographyProps={{ fontSize: m3.typeScale.labelLarge.fontSize, fontWeight: 500 }} />}
             </ListItemButton>
           </ListItem>
         </List>
 
         {renderNavGroup('Applications', applications)}
         {renderNavGroup('Core Services', coreServices)}
-
       </Box>
 
       {/* Expansion Toggle when collapsed */}
       {!expanded && (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 1 }}>
-           <IconButton onClick={() => setExpanded(true)} size="small" sx={{ mb: 2, color: 'text.secondary' }}>
+          <IconButton onClick={() => setExpanded(true)} size="small" sx={{ mb: 2, color: m3.color.onSurfaceVariant }}>
             <KeyboardDoubleArrowRightIcon />
           </IconButton>
         </Box>
       )}
 
-      <Divider sx={{ borderColor: 'rgba(0,0,0,0.04)' }} />
+      <Divider />
 
       {/* User Profile */}
-      <Box sx={{ p: expanded ? 2 : 1 }}>
-        <Box 
-          sx={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: 1.5, 
-            p: expanded ? 1.5 : 1, 
-            borderRadius: 2, 
+      <Box sx={{ p: expanded ? 1.5 : 1 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1.5,
+            p: expanded ? 1.5 : 1,
+            borderRadius: m3.shape.medium,
             cursor: 'pointer',
             justifyContent: expanded ? 'flex-start' : 'center',
-            '&:hover': { backgroundColor: 'rgba(0,0,0,0.03)' }
+            transition: 'background-color 200ms ease-in-out',
+            '&:hover': { backgroundColor: `rgba(103, 80, 164, ${m3.stateLayer.hover})` },
           }}
         >
-          <Avatar sx={{ width: 36, height: 36, bgcolor: '#F3F4F6', color: '#1F2937', fontWeight: 600, fontSize: '1rem' }}>P</Avatar>
+          <Avatar sx={{ width: 36, height: 36, bgcolor: m3.color.secondaryContainer, color: m3.color.onSecondaryContainer, fontWeight: 600, fontSize: '0.875rem' }}>P</Avatar>
           {expanded && (
             <Box sx={{ overflow: 'hidden', flexGrow: 1 }}>
-              <Typography variant="body2" sx={{ fontWeight: 600, noWrap: true }}>Phùng Bích Hằng</Typography>
-              <Typography variant="caption" color="text.secondary" sx={{ display: 'block', noWrap: true }}>hangpb@tcbs.com.vn</Typography>
+              <Typography variant="body2" sx={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Phùng Bích Hằng</Typography>
+              <Typography variant="caption" sx={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: m3.color.onSurfaceVariant }}>hangpb@tcbs.com.vn</Typography>
             </Box>
           )}
-          {expanded && <UnfoldMoreIcon fontSize="small" color="action" />}
+          {expanded && <UnfoldMoreIcon fontSize="small" sx={{ color: m3.color.onSurfaceVariant }} />}
         </Box>
       </Box>
     </Box>

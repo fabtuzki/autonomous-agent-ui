@@ -35,7 +35,11 @@ export const DataProvider = ({ children }) => {
       endTime: null,
       duration: 'Running (5m)',
       context: 'User requested in chat: "Check the PRs on the main repo."',
-      logs: ['[INIT] Started job.', '[NET] Connecting to GitHub...', '[API] Fetching PR objects...'] 
+      logs: ['[INIT] Started job.', '[NET] Connecting to GitHub...', '[API] Fetching PR objects...'],
+      history: [
+        { runId: 'r1', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), status: 'success' },
+        { runId: 'r2', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString(), status: 'failed' }
+      ]
     },
     { 
       id: 'j2', 
@@ -46,7 +50,11 @@ export const DataProvider = ({ children }) => {
       endTime: new Date(Date.now() - 1000 * 60 * 59).toISOString(),
       duration: '1m 12s',
       context: 'Heartbeat trigger (1h interval).',
-      logs: ['[INIT] Started job.', '[GEN] Drafted brief.', '[NET] Sent payload to Microsoft Teams webhook.', '[SUCCESS] Job clear.'] 
+      logs: ['[INIT] Started job.', '[GEN] Drafted brief.', '[NET] Sent payload to Microsoft Teams webhook.', '[SUCCESS] Job clear.'],
+      history: [
+        { runId: 'r1', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 25).toISOString(), status: 'success' },
+        { runId: 'r2', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 13).toISOString(), status: 'success' }
+      ]
     }
   ]);
 
@@ -60,7 +68,7 @@ export const DataProvider = ({ children }) => {
   const availableMCPs = [
     { id: 'mcp-github', name: 'GitHub Integration', description: 'Interact with repositories and PRs.', type: 'mcp' },
     { id: 'mcp-slack', name: 'Slack Integration', description: 'Read and send messages in Slack workspaces.', type: 'mcp' },
-    { id: 'mcp-postgres', name: 'PostgreSQL Tool', description: 'Run secure queries against a replicated DB.', type: 'mcp' },
+    { id: 'mcp-postgres', name: 'PostgreSQL Tool', description: 'Run secure queries against a replicated DB.', type: 'mcp', authType: 'database' },
     { id: 'mcp-jira', name: 'Jira Software', description: 'Access ticketing systems.', type: 'mcp' },
     { id: 'mcp-linear', name: 'Linear App', description: 'Manage Linear issues.', type: 'mcp' },
     { id: 'mcp-datadog', name: 'Datadog Metrics', description: 'Fetch system health and metrics.', type: 'mcp' },
@@ -83,7 +91,13 @@ export const DataProvider = ({ children }) => {
   const addAgent = (agent) => {
     const newAgent = { ...agent, id: `agent-${Date.now()}` };
     setAgents([...agents, newAgent]);
-    setChats({ ...chats, [newAgent.id]: [{ role: 'agent', content: `Hello, I'm ready. My core directive is: ${newAgent.personality}`, timestamp: new Date().toISOString() }] });
+
+    const welcomeLog = `Welcome! I'm ${newAgent.name}, your new autonomous agent.\n\n` + 
+                       `- First, navigate to the **Global Integrations (MCP)** tab to add Personal Access Tokens to any integrations you've enabled.\n` + 
+                       `- If you need me to learn new customized logic, jump into the **Internal Skills** tab to write my programmatic markdown instructions.\n\n` +
+                       `What would you like me to do for you today?`;
+
+    setChats({ ...chats, [newAgent.id]: [{ role: 'agent', content: welcomeLog, timestamp: new Date().toISOString() }] });
     return newAgent;
   };
 

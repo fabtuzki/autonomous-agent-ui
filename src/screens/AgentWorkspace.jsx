@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Tabs, Tab, Button } from '@mui/material';
+import { Box, Typography, Tabs, Tab, Button, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useData } from '../DataContext';
 import ChatTab from './WorkspaceTabs/ChatTab';
@@ -12,6 +12,8 @@ export default function AgentWorkspace() {
   const { activeAgentId, setActiveAgentId, agents } = useData();
   const [activeTab, setActiveTab] = useState(0);
   const [prefilledChat, setPrefilledChat] = useState('');
+  const theme = useTheme();
+  const m3 = theme.m3;
 
   const agent = agents.find(a => a.id === activeAgentId);
 
@@ -28,26 +30,34 @@ export default function AgentWorkspace() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <Box sx={{ px: 4, pt: 3, pb: 1, display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Button 
-          startIcon={<ArrowBackIcon />} 
+      <Box sx={{ px: 3, pt: 2.5, pb: 0.5, display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Button
+          startIcon={<ArrowBackIcon />}
           onClick={() => setActiveAgentId(null)}
-          sx={{ color: 'text.secondary', fontWeight: 600, py: 1 }}
+          sx={{ color: m3.color.onSurfaceVariant, fontWeight: 500 }}
         >
           Back to Agents
         </Button>
-        <Typography variant="h6" sx={{ borderLeft: '2px solid rgba(0,0,0,0.1)', pl: 2, fontWeight: 500 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            borderLeft: `2px solid ${m3.color.outlineVariant}`,
+            pl: 2,
+            fontWeight: 400,
+            color: m3.color.onSurface,
+          }}
+        >
           {agent.name}
         </Typography>
       </Box>
 
-      <Box sx={{ px: 4 }}>
-        <Tabs value={activeTab} onChange={handleTabChange} indicatorColor="primary" textColor="primary">
-          <Tab label="Chat" sx={{ px: 3, py: 2 }} />
-          <Tab label="Internal Skills" sx={{ px: 3, py: 2 }} />
-          <Tab label="Global MCPs" sx={{ px: 3, py: 2 }} />
-          <Tab label="Channels" sx={{ px: 3, py: 2 }} />
-          <Tab label="Active Jobs" sx={{ px: 3, py: 2 }} />
+      <Box sx={{ px: 3 }}>
+        <Tabs value={activeTab} onChange={handleTabChange}>
+          <Tab label="Chat" />
+          <Tab label="Internal Skills" />
+          <Tab label="Global MCPs" />
+          <Tab label="Channels" />
+          <Tab label="Active Jobs" />
         </Tabs>
       </Box>
 

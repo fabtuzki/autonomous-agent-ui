@@ -1,60 +1,49 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Stepper, Step, StepLabel, TextField, Box, Select, MenuItem, FormControl, InputLabel, Typography, Autocomplete, Chip, RadioGroup, FormControlLabel, Radio, Paper } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Stepper, Step, StepLabel, TextField, Box, Select, MenuItem, FormControl, InputLabel, Typography, Autocomplete, Chip, RadioGroup, FormControlLabel, Radio, Paper, useTheme } from '@mui/material';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useData } from '../DataContext';
 
 const steps = ['Basics', 'Personality', 'Capabilities', 'Heartbeat'];
 
-const personalities = [
-  { value: 'Helpful Assistant', label: 'Helpful Assistant', desc: 'Default friendly and concise mode.' },
-  { value: 'Data Analyst', label: 'Data Analyst', desc: 'Focuses strictly on numbers, trends, and JSON outputs.' },
-  { value: 'Code Critic', label: 'Code Critic', desc: 'Harsh code reviewer prioritizing security and efficiency.' },
-  { value: 'None', label: 'None (Skip)', desc: 'No system prompt enforcement.' }
-];
-
 export default function CreateAgentDialog({ open, onClose }) {
   const { addAgent, setActiveAgentId, availableMCPs, availableSkills } = useData();
   const [activeStep, setActiveStep] = useState(0);
-  
+  const theme = useTheme();
+  const m3 = theme.m3;
+
   // Form State
   const [name, setName] = useState('');
   const [model, setModel] = useState('gemini-1.5-pro');
-  const [personality, setPersonality] = useState('Helpful Assistant');
+  const [personality, setPersonality] = useState('');
   const [selectedCapabilities, setSelectedCapabilities] = useState([]);
-  const [heartbeatInterval, setHeartbeatInterval] = useState('1h');
-  const [heartbeatPrompt, setHeartbeatPrompt] = useState('Check all unread communication threads and summarize them if important.');
+  const [heartbeatInterval, setHeartbeatInterval] = useState('disabled');
+  const [heartbeatPrompt, setHeartbeatPrompt] = useState('');
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      // Distribute selections
       const configuredMCPs = selectedCapabilities
         .filter(c => c.type === 'mcp')
-        .map(mcp => ({
-          ...mcp,
-          hasCredentials: false
-        }));
-        
-      const configuredSkills = selectedCapabilities
-        .filter(c => c.type === 'skill');
+        .map(mcp => ({ ...mcp, hasCredentials: false }));
+      const configuredSkills = selectedCapabilities.filter(c => c.type === 'skill');
 
       const newAgent = addAgent({
         name: name || 'Unnamed Agent',
         model,
-        personality: personality === 'None' ? '' : personality,
+        personality,
         heartbeatInterval,
         heartbeatPrompt: heartbeatPrompt,
-        channels: [], // Empty initially
-        skills: configuredSkills, 
+        channels: [],
+        skills: configuredSkills,
         mcps: configuredMCPs
       });
       setActiveAgentId(newAgent.id);
       onClose();
-      // Reset form
       setActiveStep(0);
       setName('');
-      setPersonality('Helpful Assistant');
+      setPersonality('');
       setSelectedCapabilities([]);
-      setHeartbeatInterval('1h');
+      setHeartbeatInterval('disabled');
     } else {
       setActiveStep((prev) => prev + 1);
     }
@@ -63,9 +52,11 @@ export default function CreateAgentDialog({ open, onClose }) {
   const handleBack = () => setActiveStep((prev) => prev - 1);
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth PaperProps={{ sx: { borderRadius: 6, p: { xs: 2, md: 4 } } }}>
-      <DialogTitle sx={{ fontWeight: 700, px: 2, fontSize: '1.5rem', pb: 2, color: '#000000' }}>Initialize Autonomous Agent</DialogTitle>
-      <DialogContent sx={{ px: 2, py: 1 }}>
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <DialogTitle sx={{ fontWeight: 400, fontSize: m3.typeScale.headlineSmall.fontSize, color: m3.color.onSurface, px: 3, pt: 3, pb: 1 }}>
+        Initialize Autonomous Agent
+      </DialogTitle>
+      <DialogContent sx={{ px: 3, py: 1 }}>
         <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4, mt: 2 }}>
           {steps.map((label) => (
             <Step key={label}>
@@ -91,38 +82,21 @@ export default function CreateAgentDialog({ open, onClose }) {
 
           {/* STEP 1: PERSONALITY */}
           {activeStep === 1 && (
-            <FormControl component="fieldset" fullWidth>
-              <RadioGroup value={personality} onChange={e => setPersonality(e.target.value)}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  {personalities.map((p) => (
-                    <Paper 
-                      key={p.value}
-                      variant="outlined" 
-                      sx={{ 
-                        p: 1.5, 
-                        display: 'flex', 
-                        alignItems: 'flex-start',
-                        borderColor: personality === p.value ? 'primary.main' : 'rgba(0,0,0,0.1)',
-                        backgroundColor: personality === p.value ? 'rgba(63,81,181,0.03)' : 'transparent',
-                        borderRadius: 2
-                      }}
-                    >
-                      <FormControlLabel 
-                        value={p.value} 
-                        control={<Radio color="primary" />} 
-                        label={
-                          <Box>
-                            <Typography variant="body1" sx={{ fontWeight: 600 }}>{p.label}</Typography>
-                            <Typography variant="body2" color="text.secondary">{p.desc}</Typography>
-                          </Box>
-                        } 
-                        sx={{ m: 0, width: '100%', alignItems: 'flex-start' }}
-                      />
-                    </Paper>
-                  ))}
-                </Box>
-              </RadioGroup>
-            </FormControl>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Typography variant="body1" sx={{ color: m3.color.onSurfaceVariant, mb: 1 }}>
+                Define instructions spanning the entire agent's autonomous context window.
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={8}
+                label="System Prompt (Optional)"
+                placeholder="e.g. You are a senior DevOps engineer. Always review code for security vulnerabilities before proposing fixes..."
+                variant="outlined"
+                value={personality}
+                onChange={e => setPersonality(e.target.value)}
+              />
+            </Box>
           )}
 
           {/* STEP 2: CAPABILITIES */}
@@ -136,28 +110,28 @@ export default function CreateAgentDialog({ open, onClose }) {
                 value={selectedCapabilities}
                 onChange={(event, newValue) => setSelectedCapabilities(newValue)}
                 renderInput={(params) => (
-                  <TextField 
-                    {...params} 
-                    variant="outlined" 
-                    label="Search Capabilities..." 
-                    placeholder="e.g. GitHub, Web Serper" 
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Search Capabilities..."
+                    placeholder="e.g. GitHub, Web Serper"
                     sx={{ mt: 1 }}
                   />
                 )}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
-                    <Chip 
-                      variant={option.type === 'mcp' ? 'filled' : 'outlined'} 
-                      color={option.type === 'mcp' ? 'primary' : 'secondary'} 
-                      label={option.name} 
-                      {...getTagProps({ index })} 
+                    <Chip
+                      variant={option.type === 'mcp' ? 'filled' : 'outlined'}
+                      color={option.type === 'mcp' ? 'primary' : 'secondary'}
+                      label={option.name}
+                      {...getTagProps({ index })}
                     />
                   ))
                 }
               />
-              
+
               {selectedCapabilities.some(c => c.type === 'mcp') && (
-                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', p: 2, backgroundColor: '#FFF3E0', color: '#E65100', borderRadius: 2 }}>
+                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', p: 2, backgroundColor: m3.color.warningContainer, color: m3.color.onWarningContainer, borderRadius: `${m3.shape.small}px` }}>
                   <WarningAmberIcon fontSize="small" />
                   <Typography variant="body2" sx={{ fontWeight: 500 }}>
                     Selected MCPs require personal token setup in workspace later.
@@ -165,10 +139,27 @@ export default function CreateAgentDialog({ open, onClose }) {
                 </Box>
               )}
 
-              <Box sx={{ p: 2, bgcolor: '#F5F7FA', borderRadius: 2, border: '1px dashed rgba(0,0,0,0.1)' }}>
-                <Typography variant="body2" color="text.secondary">
-                  <strong>Note:</strong> Custom internal skills can be programmed organically later via the Chat interface using the `/addnewskill` protocol.
+              {/* Built-in Core Functions — M3 Tonal Card */}
+              <Box
+                sx={{
+                  p: 2.5,
+                  borderRadius: `${m3.shape.medium}px`,
+                  backgroundColor: m3.color.secondaryContainer,
+                  color: m3.color.onSecondaryContainer,
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <SettingsIcon fontSize="small" />
+                  <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>Built-in Core Functions</Typography>
+                </Box>
+                <Typography variant="body2" sx={{ lineHeight: 1.5, mb: 1.5 }}>
+                  These universal tools are natively embedded into the agent runtime and do not need to be manually configured.
                 </Typography>
+                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                  <Chip label="Scheduler" size="small" variant="outlined" sx={{ borderColor: m3.color.onSecondaryContainer, color: m3.color.onSecondaryContainer }} />
+                  <Chip label="File System Writer" size="small" variant="outlined" sx={{ borderColor: m3.color.onSecondaryContainer, color: m3.color.onSecondaryContainer }} />
+                  <Chip label="Web Serper" size="small" variant="outlined" sx={{ borderColor: m3.color.onSecondaryContainer, color: m3.color.onSecondaryContainer }} />
+                </Box>
               </Box>
             </Box>
           )}
@@ -177,32 +168,32 @@ export default function CreateAgentDialog({ open, onClose }) {
           {activeStep === 3 && (
             <>
               <FormControl fullWidth>
-                <InputLabel>Wake-up Interval (Heartbeat)</InputLabel>
-                <Select value={heartbeatInterval} label="Wake-up Interval (Heartbeat)" onChange={e => setHeartbeatInterval(e.target.value)}>
+                <InputLabel>Wake-up Interval (Optional)</InputLabel>
+                <Select value={heartbeatInterval} label="Wake-up Interval (Optional)" onChange={e => setHeartbeatInterval(e.target.value)}>
+                  <MenuItem value="disabled">Disabled (No Heartbeat)</MenuItem>
                   <MenuItem value="15m">Every 15 Minutes</MenuItem>
                   <MenuItem value="1h">Every 1 Hour</MenuItem>
                   <MenuItem value="12h">Every 12 Hours</MenuItem>
                   <MenuItem value="manual">Manual Execution Only</MenuItem>
                 </Select>
               </FormControl>
-              <TextField 
-                fullWidth 
-                multiline 
-                rows={4} 
-                label="Objective Prompt on Wake" 
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Objective Prompt on Wake (Optional)"
                 value={heartbeatPrompt}
                 onChange={e => setHeartbeatPrompt(e.target.value)}
               />
             </>
           )}
-
         </Box>
       </DialogContent>
-      <DialogActions sx={{ pb: 2, px: 3, pt: 2 }}>
-        <Button onClick={onClose} sx={{ color: '#444444', fontWeight: 600 }}>Cancel</Button>
+      <DialogActions sx={{ pb: 3, px: 3, pt: 2 }}>
+        <Button onClick={onClose} sx={{ color: m3.color.onSurfaceVariant }}>Cancel</Button>
         <Box sx={{ flexGrow: 1 }} />
-        <Button onClick={handleBack} disabled={activeStep === 0} sx={{ fontWeight: 600 }}>Back</Button>
-        <Button variant="contained" onClick={handleNext} disableElevation color="primary" sx={{ px: 5, py: 1.5, fontSize: '1rem' }}>
+        <Button onClick={handleBack} disabled={activeStep === 0}>Back</Button>
+        <Button variant="contained" onClick={handleNext} color="primary">
           {activeStep === steps.length - 1 ? 'Start Agent' : 'Next'}
         </Button>
       </DialogActions>

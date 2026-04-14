@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Typography, Grid, Card, CardContent, CardActions, Button, IconButton, Fab, Menu, MenuItem, Chip, CardActionArea } from '@mui/material';
+import { Box, Typography, Card, CardActions, Button, IconButton, Menu, MenuItem, Chip, CardActionArea, useTheme } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddIcon from '@mui/icons-material/Add';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
@@ -11,6 +12,8 @@ export default function AgentHub() {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedAgentId, setSelectedAgentId] = useState(null);
+  const theme = useTheme();
+  const m3 = theme.m3;
 
   const handleMenuClick = (event, id) => {
     event.stopPropagation();
@@ -33,44 +36,101 @@ export default function AgentHub() {
   };
 
   return (
-    <Box sx={{ p: 4, height: '100%', overflowY: 'auto' }}>
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 700, color: '#001F3F' }}>
-        Agents Hub
-      </Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-        Manage and monitor all your autonomous agents from one dashboard.
-      </Typography>
+    <Box sx={{ p: { xs: 3, md: 4 }, height: '100%', overflowY: 'auto' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 4 }}>
+        <Box>
+          <Typography variant="h4" gutterBottom sx={{ color: m3.color.onSurface }}>
+            Agents Hub
+          </Typography>
+          <Typography variant="body1" sx={{ color: m3.color.onSurfaceVariant }}>
+            Manage and monitor all your autonomous agents from one dashboard.
+          </Typography>
+        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setCreateDialogOpen(true)}
+          startIcon={<AddIcon />}
+          sx={{ flexShrink: 0 }}
+        >
+          Create Agent
+        </Button>
+      </Box>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} columns={12}>
         {agents.map(agent => (
-          <Grid item xs={12} sm={6} md={4} key={agent.id}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <CardActionArea onClick={() => handleCardClick(agent.id)} sx={{ flexGrow: 1, p: 2, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', mb: 2 }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <SmartToyIcon sx={{ color: 'primary.main' }} />
-                    <Typography variant="h6" component="div">
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={agent.id}>
+            <Card
+              sx={{
+                height: 240,
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: m3.color.surfaceContainerLow,
+                '&:hover': {
+                  boxShadow: m3.elevation.level2,
+                  borderColor: m3.color.outline,
+                },
+              }}
+            >
+              <CardActionArea
+                onClick={() => handleCardClick(agent.id)}
+                sx={{ flexGrow: 1, p: 3, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', mb: 1.5 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, minWidth: 0, pr: 2 }}>
+                    <SmartToyIcon sx={{ color: m3.color.primary, flexShrink: 0 }} />
+                    <Typography
+                      variant="subtitle1"
+                      component="div"
+                      sx={{
+                        fontWeight: 600,
+                        color: m3.color.onSurface,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 1,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
                       {agent.name}
                     </Typography>
                   </Box>
-                  <IconButton 
-                    size="small" 
+                  <IconButton
+                    size="small"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleMenuClick(e, agent.id);
                     }}
+                    sx={{ color: m3.color.onSurfaceVariant }}
                   >
                     <MoreVertIcon />
                   </IconButton>
                 </Box>
-                
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
-                  {agent.personality}
+
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: m3.color.onSurfaceVariant,
+                    mb: 2,
+                    flexGrow: 1,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {agent.personality || "No personality defined."}
                 </Typography>
-                
+
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                   <Chip label={agent.model} size="small" variant="outlined" />
-                  <Chip label={`${agent.skills.length} Skills`} size="small" sx={{ backgroundColor: 'rgba(63, 81, 181, 0.08)', color: '#3F51B5' }} />
+                  <Chip
+                    label={`${agent.skills.length} Skills`}
+                    size="small"
+                    sx={{ backgroundColor: m3.color.primaryContainer, color: m3.color.onPrimaryContainer }}
+                  />
                 </Box>
               </CardActionArea>
             </Card>
@@ -78,9 +138,9 @@ export default function AgentHub() {
         ))}
 
         {agents.length === 0 && (
-          <Grid item xs={12}>
-            <Box sx={{ p: 6, textAlign: 'center', backgroundColor: '#fff', borderRadius: 6 }}>
-              <Typography variant="h6" color="text.secondary">No agents found. Create one to get started.</Typography>
+          <Grid size={12}>
+            <Box sx={{ p: 6, textAlign: 'center', backgroundColor: m3.color.surfaceContainerLow, borderRadius: `${m3.shape.medium}px` }}>
+              <Typography variant="body1" sx={{ color: m3.color.onSurfaceVariant }}>No agents found. Create one to get started.</Typography>
             </Box>
           </Grid>
         )}
@@ -90,19 +150,10 @@ export default function AgentHub() {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
+        PaperProps={{ sx: { borderRadius: `${m3.shape.extraSmall}px`, mt: 0.5 } }}
       >
-        <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>Delete Agent</MenuItem>
+        <MenuItem onClick={handleDelete} sx={{ color: m3.color.error }}>Delete Agent</MenuItem>
       </Menu>
-
-      <Fab 
-        color="secondary" 
-        onClick={() => setCreateDialogOpen(true)}
-        sx={{ position: 'absolute', bottom: 32, right: 32, px: 3, borderRadius: 16 }}
-        variant="extended"
-      >
-        <AddIcon sx={{ mr: 1 }} />
-        Create Agent
-      </Fab>
 
       <CreateAgentDialog open={createDialogOpen} onClose={() => setCreateDialogOpen(false)} />
     </Box>
