@@ -39,7 +39,7 @@ export default function ChannelsTab({ agent }) {
             </Box>
           </Box>
           <FormControlLabel
-            control={<Switch checked={isTeamsEnabled} onChange={handleToggleTeams} color="primary" />}
+            control={<Switch checked={isTeamsEnabled} onChange={handleToggleTeams} color="info" />}
             label=""
             sx={{ m: 0 }}
           />

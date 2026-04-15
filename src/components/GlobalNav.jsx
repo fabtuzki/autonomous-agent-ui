@@ -79,20 +79,20 @@ export default function GlobalNav() {
                   py: 0.75,
                   px: expanded ? 2 : 1.5,
                   minHeight: 44,
-                  backgroundColor: isActive ? m3.color.secondaryContainer : 'transparent',
-                  color: isActive ? m3.color.onSecondaryContainer : m3.color.onSurfaceVariant,
+                  backgroundColor: isActive ? m3.color.primaryContainer : 'transparent',
+                  color: isActive ? m3.color.onPrimaryContainer : m3.color.onSurfaceVariant,
                   justifyContent: expanded ? 'flex-start' : 'center',
                   transition: 'background-color 200ms ease-in-out',
                   '&:hover': {
                     backgroundColor: isActive
-                      ? m3.color.secondaryContainer
-                      : `rgba(103, 80, 164, ${m3.stateLayer.hover})`,
+                      ? m3.color.primaryContainer
+                      : `rgba(90, 75, 254, ${m3.stateLayer.hover})`,
                   },
                 }}
               >
                 <ListItemIcon
                   sx={{
-                    color: isActive ? m3.color.onSecondaryContainer : 'inherit',
+                    color: isActive ? m3.color.onPrimaryContainer : 'inherit',
                     minWidth: expanded ? 36 : 'auto',
                     mr: expanded ? 0 : 0,
                     '& .MuiSvgIcon-root': { fontSize: 24 },
@@ -166,7 +166,7 @@ export default function GlobalNav() {
               color: m3.color.onSurfaceVariant,
               borderRadius: m3.shape.small,
               border: `1px solid ${m3.color.outlineVariant}`,
-              '&:hover': { backgroundColor: `rgba(103, 80, 164, ${m3.stateLayer.hover})` },
+              '&:hover': { backgroundColor: `rgba(90, 75, 254, ${m3.stateLayer.hover})` },
             }}
           >
             <KeyboardDoubleArrowLeftIcon fontSize="small" />
@@ -213,10 +213,10 @@ export default function GlobalNav() {
             cursor: 'pointer',
             justifyContent: expanded ? 'flex-start' : 'center',
             transition: 'background-color 200ms ease-in-out',
-            '&:hover': { backgroundColor: `rgba(103, 80, 164, ${m3.stateLayer.hover})` },
+            '&:hover': { backgroundColor: `rgba(90, 75, 254, ${m3.stateLayer.hover})` },
           }}
         >
-          <Avatar sx={{ width: 36, height: 36, bgcolor: m3.color.secondaryContainer, color: m3.color.onSecondaryContainer, fontWeight: 600, fontSize: '0.875rem' }}>P</Avatar>
+          <Avatar sx={{ width: 36, height: 36, bgcolor: m3.color.primaryContainer, color: m3.color.onPrimaryContainer, fontWeight: 600, fontSize: '0.875rem' }}>P</Avatar>
           {expanded && (
             <Box sx={{ overflow: 'hidden', flexGrow: 1 }}>
               <Typography variant="body2" sx={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Phùng Bích Hằng</Typography>

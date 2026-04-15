@@ -79,7 +79,7 @@ export default function SkillsTab({ agent }) {
     cursor: 'pointer',
     gap: 2,
     '&:hover': {
-      backgroundColor: `rgba(103, 80, 164, ${m3.stateLayer.hover})`,
+      backgroundColor: `rgba(90, 75, 254, ${m3.stateLayer.hover})`,
       borderColor: m3.color.outline,
     },
   });

@@ -5,77 +5,86 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/700.css';
 
 // ============================================================================
-// Material Design 3 — Design Token System
-// Seed Color: #6750A4 (M3 Baseline Purple)
-// Generated per https://m3.material.io/styles/color/system
+// xStudio AI Studio — Design Token System
+// Mapped from AI Studio CSS variables (tailwind.css / global.less)
+// Primary: rgb(90,75,254) / #5A4BFE  (--colors-background-core-standard)
+// Accent:  #00beb4                    (--accent-primary)
+// Red CTA: #d82121                    (Ant Design brand override)
 // ============================================================================
 
-const m3Tokens = {
-  // --- Color Roles (Light Scheme) ---
+const xStudioTokens = {
+  // --- Color Roles (Light Scheme — mapped from AI Studio CSS vars) ---
   color: {
-    primary:              '#6750A4',
+    // Brand purple (--colors-background-core-standard / --colors-text-core-standard)
+    primary:              '#5A4BFE',
     onPrimary:            '#FFFFFF',
-    primaryContainer:     '#EADDFF',
-    onPrimaryContainer:   '#21005D',
+    primaryContainer:     '#EDE9FF',
+    onPrimaryContainer:   '#1A0066',
 
-    secondary:            '#625B71',
+    // Red CTA (Ant Design text button / radio checked in global.less)
+    secondary:            '#d82121',
     onSecondary:          '#FFFFFF',
-    secondaryContainer:   '#E8DEF8',
-    onSecondaryContainer: '#1D192B',
+    secondaryContainer:   '#FEE2E2',
+    onSecondaryContainer: '#7F1D1D',
 
-    tertiary:             '#7D5260',
+    // Teal accent (--accent-primary: #00beb4)
+    tertiary:             '#00beb4',
     onTertiary:           '#FFFFFF',
-    tertiaryContainer:    '#FFD8E4',
-    onTertiaryContainer:  '#31111D',
+    tertiaryContainer:    '#CCFBF1',
+    onTertiaryContainer:  '#134E4A',
 
-    error:                '#B3261E',
+    // Error (--state-error / --colors-text-functional-danger)
+    error:                '#DC2626',
     onError:              '#FFFFFF',
-    errorContainer:       '#F9DEDC',
-    onErrorContainer:     '#410E0B',
+    errorContainer:       '#FEE2E2',
+    onErrorContainer:     '#7F1D1D',
 
-    surface:              '#FFFBFE',
-    onSurface:            '#1C1B1F',
-    surfaceVariant:       '#E7E0EC',
-    onSurfaceVariant:     '#49454F',
+    // Surfaces (--bg-base, --bg-card, --bg-component, --bg-input, --bg-title)
+    surface:              '#FFFFFF',
+    onSurface:            '#1A1A1A',
+    surfaceVariant:       '#F0EFF4',
+    onSurfaceVariant:     '#6B7280',
 
     surfaceContainerLowest:  '#FFFFFF',
-    surfaceContainerLow:     '#F7F2FA',
-    surfaceContainer:        '#F3EDF7',
-    surfaceContainerHigh:    '#ECE6F0',
-    surfaceContainerHighest: '#E6E0E9',
+    surfaceContainerLow:     '#FAFAFA',
+    surfaceContainer:        '#F5F5F7',
+    surfaceContainerHigh:    '#EFEFEF',
+    surfaceContainerHighest: '#E8E8ED',
 
-    inverseSurface:       '#313033',
-    inverseOnSurface:     '#F4EFF4',
-    inversePrimary:       '#D0BCFF',
+    // Inverse (terminal / dark panels)
+    inverseSurface:       '#1E293B',
+    inverseOnSurface:     '#E2E8F0',
+    inversePrimary:       '#A78BFA',
 
-    outline:              '#79747E',
-    outlineVariant:       '#CAC4D0',
+    // Borders (--border-default, --border-accent)
+    outline:              '#9CA3AF',
+    outlineVariant:       '#E5E7EB',
 
     scrim:                '#000000',
     shadow:               '#000000',
 
-    // Extended success (not in M3 baseline, custom tonal)
-    success:              '#1B6D2F',
-    successContainer:     '#A4F4AA',
-    onSuccessContainer:   '#002107',
+    // Extended success (--state-success)
+    success:              '#16A34A',
+    successContainer:     '#DCFCE7',
+    onSuccessContainer:   '#14532D',
 
-    // Extended warning
-    warning:              '#7D5700',
-    warningContainer:     '#FFDEA6',
-    onWarningContainer:   '#271900',
+    // Extended warning (--state-warning)
+    warning:              '#D97706',
+    warningContainer:     '#FEF3C7',
+    onWarningContainer:   '#78350F',
   },
 
-  // --- Elevation (M3 uses tonal surface tinting, not just shadows) ---
+  // --- Elevation (same structure, slightly refined shadows) ---
   elevation: {
     level0: 'none',
-    level1: '0px 1px 2px 0px rgba(0,0,0,0.30), 0px 1px 3px 1px rgba(0,0,0,0.15)',
-    level2: '0px 1px 2px 0px rgba(0,0,0,0.30), 0px 2px 6px 2px rgba(0,0,0,0.15)',
-    level3: '0px 1px 3px 0px rgba(0,0,0,0.30), 0px 4px 8px 3px rgba(0,0,0,0.15)',
-    level4: '0px 2px 3px 0px rgba(0,0,0,0.30), 0px 6px 10px 4px rgba(0,0,0,0.15)',
-    level5: '0px 4px 4px 0px rgba(0,0,0,0.30), 0px 8px 12px 6px rgba(0,0,0,0.15)',
+    level1: '0px 1px 2px 0px rgba(0,0,0,0.06), 0px 1px 3px 0px rgba(0,0,0,0.10)',
+    level2: '0px 1px 2px 0px rgba(0,0,0,0.06), 0px 2px 6px 2px rgba(0,0,0,0.10)',
+    level3: '0px 1px 3px 0px rgba(0,0,0,0.10), 0px 4px 8px 3px rgba(0,0,0,0.08)',
+    level4: '0px 2px 3px 0px rgba(0,0,0,0.10), 0px 6px 10px 4px rgba(0,0,0,0.08)',
+    level5: '0px 4px 4px 0px rgba(0,0,0,0.10), 0px 8px 12px 6px rgba(0,0,0,0.08)',
   },
 
-  // --- Shape (Corner Radius) ---
+  // --- Shape (Corner Radius) — --radius: 0.5rem (8px) ---
   shape: {
     none:       0,
     extraSmall: 4,
@@ -86,27 +95,27 @@ const m3Tokens = {
     full:       9999,
   },
 
-  // --- M3 Type Scale (using Inter as a Roboto-equivalent) ---
+  // --- Type Scale (using Inter — mapped through SF Pro Display font-family) ---
   typeScale: {
-    displayLarge:  { fontSize: '3.5625rem',  lineHeight: '4rem',    fontWeight: 400, letterSpacing: '-0.25px' },  // 57/64
-    displayMedium: { fontSize: '2.8125rem',  lineHeight: '3.25rem', fontWeight: 400, letterSpacing: '0px' },      // 45/52
-    displaySmall:  { fontSize: '2.25rem',    lineHeight: '2.75rem', fontWeight: 400, letterSpacing: '0px' },      // 36/44
+    displayLarge:  { fontSize: '3.5625rem',  lineHeight: '4rem',    fontWeight: 400, letterSpacing: '-0.25px' },
+    displayMedium: { fontSize: '2.8125rem',  lineHeight: '3.25rem', fontWeight: 400, letterSpacing: '0px' },
+    displaySmall:  { fontSize: '2.25rem',    lineHeight: '2.75rem', fontWeight: 400, letterSpacing: '0px' },
 
-    headlineLarge:  { fontSize: '2rem',      lineHeight: '2.5rem',  fontWeight: 400, letterSpacing: '0px' },      // 32/40
-    headlineMedium: { fontSize: '1.75rem',   lineHeight: '2.25rem', fontWeight: 400, letterSpacing: '0px' },      // 28/36
-    headlineSmall:  { fontSize: '1.5rem',    lineHeight: '2rem',    fontWeight: 400, letterSpacing: '0px' },      // 24/32
+    headlineLarge:  { fontSize: '2rem',      lineHeight: '2.5rem',  fontWeight: 400, letterSpacing: '0px' },
+    headlineMedium: { fontSize: '1.75rem',   lineHeight: '2.25rem', fontWeight: 400, letterSpacing: '0px' },
+    headlineSmall:  { fontSize: '1.5rem',    lineHeight: '2rem',    fontWeight: 400, letterSpacing: '0px' },
 
-    titleLarge:  { fontSize: '1.375rem', lineHeight: '1.75rem', fontWeight: 400, letterSpacing: '0px' },          // 22/28
-    titleMedium: { fontSize: '1rem',     lineHeight: '1.5rem',  fontWeight: 500, letterSpacing: '0.15px' },       // 16/24
-    titleSmall:  { fontSize: '0.875rem', lineHeight: '1.25rem', fontWeight: 500, letterSpacing: '0.1px' },        // 14/20
+    titleLarge:  { fontSize: '1.375rem', lineHeight: '1.75rem', fontWeight: 400, letterSpacing: '0px' },
+    titleMedium: { fontSize: '1rem',     lineHeight: '1.5rem',  fontWeight: 500, letterSpacing: '0.15px' },
+    titleSmall:  { fontSize: '0.875rem', lineHeight: '1.25rem', fontWeight: 500, letterSpacing: '0.1px' },
 
-    bodyLarge:  { fontSize: '1rem',     lineHeight: '1.5rem',  fontWeight: 400, letterSpacing: '0.5px' },         // 16/24
-    bodyMedium: { fontSize: '0.875rem', lineHeight: '1.25rem', fontWeight: 400, letterSpacing: '0.25px' },        // 14/20
-    bodySmall:  { fontSize: '0.75rem',  lineHeight: '1rem',    fontWeight: 400, letterSpacing: '0.4px' },         // 12/16
+    bodyLarge:  { fontSize: '1rem',     lineHeight: '1.5rem',  fontWeight: 400, letterSpacing: '0.5px' },
+    bodyMedium: { fontSize: '0.875rem', lineHeight: '1.25rem', fontWeight: 400, letterSpacing: '0.25px' },
+    bodySmall:  { fontSize: '0.75rem',  lineHeight: '1rem',    fontWeight: 400, letterSpacing: '0.4px' },
 
-    labelLarge:  { fontSize: '0.875rem', lineHeight: '1.25rem', fontWeight: 500, letterSpacing: '0.1px' },        // 14/20
-    labelMedium: { fontSize: '0.75rem',  lineHeight: '1rem',    fontWeight: 500, letterSpacing: '0.5px' },        // 12/16
-    labelSmall:  { fontSize: '0.6875rem', lineHeight: '1rem',   fontWeight: 500, letterSpacing: '0.5px' },        // 11/16
+    labelLarge:  { fontSize: '0.875rem', lineHeight: '1.25rem', fontWeight: 500, letterSpacing: '0.1px' },
+    labelMedium: { fontSize: '0.75rem',  lineHeight: '1rem',    fontWeight: 500, letterSpacing: '0.5px' },
+    labelSmall:  { fontSize: '0.6875rem', lineHeight: '1rem',   fontWeight: 500, letterSpacing: '0.5px' },
   },
 
   // --- State layer opacities ---
@@ -119,83 +128,89 @@ const m3Tokens = {
 };
 
 // ============================================================================
-// MUI Theme — M3 Token Application
+// MUI Theme — xStudio Token Application
 // ============================================================================
 
 const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: m3Tokens.color.primary,
-      light: m3Tokens.color.primaryContainer,
-      dark: m3Tokens.color.onPrimaryContainer,
-      contrastText: m3Tokens.color.onPrimary,
+      main: xStudioTokens.color.primary,
+      light: xStudioTokens.color.primaryContainer,
+      dark: xStudioTokens.color.onPrimaryContainer,
+      contrastText: xStudioTokens.color.onPrimary,
     },
     secondary: {
-      main: m3Tokens.color.secondary,
-      light: m3Tokens.color.secondaryContainer,
-      dark: m3Tokens.color.onSecondaryContainer,
-      contrastText: m3Tokens.color.onSecondary,
+      main: xStudioTokens.color.secondary,
+      light: xStudioTokens.color.secondaryContainer,
+      dark: xStudioTokens.color.onSecondaryContainer,
+      contrastText: xStudioTokens.color.onSecondary,
     },
     error: {
-      main: m3Tokens.color.error,
-      light: m3Tokens.color.errorContainer,
-      dark: m3Tokens.color.onErrorContainer,
-      contrastText: m3Tokens.color.onError,
+      main: xStudioTokens.color.error,
+      light: xStudioTokens.color.errorContainer,
+      dark: xStudioTokens.color.onErrorContainer,
+      contrastText: xStudioTokens.color.onError,
     },
     warning: {
-      main: m3Tokens.color.warning,
-      light: m3Tokens.color.warningContainer,
-      dark: m3Tokens.color.onWarningContainer,
+      main: xStudioTokens.color.warning,
+      light: xStudioTokens.color.warningContainer,
+      dark: xStudioTokens.color.onWarningContainer,
     },
     success: {
-      main: m3Tokens.color.success,
-      light: m3Tokens.color.successContainer,
-      dark: m3Tokens.color.onSuccessContainer,
+      main: xStudioTokens.color.success,
+      light: xStudioTokens.color.successContainer,
+      dark: xStudioTokens.color.onSuccessContainer,
+    },
+    info: {
+      main: xStudioTokens.color.tertiary,
+      light: xStudioTokens.color.tertiaryContainer,
+      dark: xStudioTokens.color.onTertiaryContainer,
+      contrastText: xStudioTokens.color.onTertiary,
     },
     background: {
-      default: m3Tokens.color.surface,
-      paper: m3Tokens.color.surfaceContainerLowest,
+      default: xStudioTokens.color.surface,
+      paper: xStudioTokens.color.surfaceContainerLowest,
     },
     text: {
-      primary: m3Tokens.color.onSurface,
-      secondary: m3Tokens.color.onSurfaceVariant,
-      disabled: 'rgba(28, 27, 31, 0.38)',
+      primary: xStudioTokens.color.onSurface,
+      secondary: xStudioTokens.color.onSurfaceVariant,
+      disabled: 'rgba(26, 26, 26, 0.38)',
     },
-    divider: m3Tokens.color.outlineVariant,
+    divider: xStudioTokens.color.outlineVariant,
     action: {
-      active: m3Tokens.color.onSurfaceVariant,
-      hover: `rgba(103, 80, 164, ${m3Tokens.stateLayer.hover})`,
-      selected: `rgba(103, 80, 164, ${m3Tokens.stateLayer.pressed})`,
-      disabledBackground: 'rgba(28, 27, 31, 0.12)',
-      disabled: 'rgba(28, 27, 31, 0.38)',
+      active: xStudioTokens.color.onSurfaceVariant,
+      hover: `rgba(90, 75, 254, ${xStudioTokens.stateLayer.hover})`,
+      selected: `rgba(90, 75, 254, ${xStudioTokens.stateLayer.pressed})`,
+      disabledBackground: 'rgba(26, 26, 26, 0.12)',
+      disabled: 'rgba(26, 26, 26, 0.38)',
     },
   },
 
   typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-    // Map M3 type scale to MUI variants
-    h1: m3Tokens.typeScale.displayLarge,
-    h2: m3Tokens.typeScale.displayMedium,
-    h3: m3Tokens.typeScale.displaySmall,
-    h4: m3Tokens.typeScale.headlineMedium,     // Page-level headings
-    h5: m3Tokens.typeScale.headlineSmall,       // Section headings
-    h6: m3Tokens.typeScale.titleLarge,          // Sub-section / card titles
-    subtitle1: m3Tokens.typeScale.titleMedium,
-    subtitle2: m3Tokens.typeScale.titleSmall,
-    body1: m3Tokens.typeScale.bodyLarge,
-    body2: m3Tokens.typeScale.bodyMedium,
-    button: m3Tokens.typeScale.labelLarge,
-    caption: m3Tokens.typeScale.labelMedium,
-    overline: m3Tokens.typeScale.labelSmall,
+    fontFamily: '"Inter", "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+    // Map type scale to MUI variants
+    h1: xStudioTokens.typeScale.displayLarge,
+    h2: xStudioTokens.typeScale.displayMedium,
+    h3: xStudioTokens.typeScale.displaySmall,
+    h4: xStudioTokens.typeScale.headlineMedium,
+    h5: xStudioTokens.typeScale.headlineSmall,
+    h6: xStudioTokens.typeScale.titleLarge,
+    subtitle1: xStudioTokens.typeScale.titleMedium,
+    subtitle2: xStudioTokens.typeScale.titleSmall,
+    body1: xStudioTokens.typeScale.bodyLarge,
+    body2: xStudioTokens.typeScale.bodyMedium,
+    button: xStudioTokens.typeScale.labelLarge,
+    caption: xStudioTokens.typeScale.labelMedium,
+    overline: xStudioTokens.typeScale.labelSmall,
   },
 
   shape: {
-    borderRadius: m3Tokens.shape.medium,  // 12px default
+    borderRadius: xStudioTokens.shape.medium,
   },
 
   // Export tokens for direct use in sx props
-  m3: m3Tokens,
+  m3: xStudioTokens,
 
   components: {
     // --- Buttons ---
@@ -205,12 +220,12 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          borderRadius: m3Tokens.shape.full,
+          borderRadius: xStudioTokens.shape.full,
           padding: '10px 24px',
-          fontSize: m3Tokens.typeScale.labelLarge.fontSize,
-          fontWeight: m3Tokens.typeScale.labelLarge.fontWeight,
-          letterSpacing: m3Tokens.typeScale.labelLarge.letterSpacing,
-          lineHeight: m3Tokens.typeScale.labelLarge.lineHeight,
+          fontSize: xStudioTokens.typeScale.labelLarge.fontSize,
+          fontWeight: xStudioTokens.typeScale.labelLarge.fontWeight,
+          letterSpacing: xStudioTokens.typeScale.labelLarge.letterSpacing,
+          lineHeight: xStudioTokens.typeScale.labelLarge.lineHeight,
           textTransform: 'none',
           minHeight: 40,
           transition: 'all 200ms ease-in-out',
@@ -218,15 +233,15 @@ const theme = createTheme({
         contained: {
           boxShadow: 'none',
           '&:hover': {
-            boxShadow: m3Tokens.elevation.level1,
+            boxShadow: xStudioTokens.elevation.level1,
           },
         },
         outlined: {
-          borderColor: m3Tokens.color.outline,
+          borderColor: xStudioTokens.color.outline,
         },
         text: {
           '&:hover': {
-            backgroundColor: `rgba(103, 80, 164, ${m3Tokens.stateLayer.hover})`,
+            backgroundColor: `rgba(90, 75, 254, ${xStudioTokens.stateLayer.hover})`,
           },
         },
       },
@@ -236,8 +251,8 @@ const theme = createTheme({
     MuiFab: {
       styleOverrides: {
         root: {
-          borderRadius: m3Tokens.shape.large,  // 16px
-          boxShadow: m3Tokens.elevation.level3,
+          borderRadius: xStudioTokens.shape.large,
+          boxShadow: xStudioTokens.elevation.level3,
         },
       },
     },
@@ -246,10 +261,10 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: m3Tokens.shape.medium,     // 12px
+          borderRadius: xStudioTokens.shape.medium,
           boxShadow: 'none',
-          backgroundColor: m3Tokens.color.surfaceContainerLow,
-          border: `1px solid ${m3Tokens.color.outlineVariant}`,
+          backgroundColor: xStudioTokens.color.surfaceContainerLow,
+          border: `1px solid ${xStudioTokens.color.outlineVariant}`,
           transition: 'box-shadow 200ms ease-in-out, border-color 200ms ease-in-out',
         },
       },
@@ -259,12 +274,12 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundImage: 'none',  // Remove MUI gradient overlay
+          backgroundImage: 'none',
         },
-        elevation0: { boxShadow: m3Tokens.elevation.level0 },
-        elevation1: { boxShadow: m3Tokens.elevation.level1 },
-        elevation2: { boxShadow: m3Tokens.elevation.level2 },
-        elevation3: { boxShadow: m3Tokens.elevation.level3 },
+        elevation0: { boxShadow: xStudioTokens.elevation.level0 },
+        elevation1: { boxShadow: xStudioTokens.elevation.level1 },
+        elevation2: { boxShadow: xStudioTokens.elevation.level2 },
+        elevation3: { boxShadow: xStudioTokens.elevation.level3 },
       },
     },
 
@@ -273,12 +288,12 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           minHeight: 48,
-          borderBottom: `1px solid ${m3Tokens.color.surfaceVariant}`,
+          borderBottom: `1px solid ${xStudioTokens.color.surfaceVariant}`,
         },
         indicator: {
           height: 3,
           borderRadius: '3px 3px 0 0',
-          backgroundColor: m3Tokens.color.primary,
+          backgroundColor: xStudioTokens.color.primary,
         },
       },
     },
@@ -288,17 +303,17 @@ const theme = createTheme({
           minHeight: 48,
           fontWeight: 500,
           textTransform: 'none',
-          fontSize: m3Tokens.typeScale.titleSmall.fontSize,
-          letterSpacing: m3Tokens.typeScale.titleSmall.letterSpacing,
-          color: m3Tokens.color.onSurfaceVariant,
+          fontSize: xStudioTokens.typeScale.titleSmall.fontSize,
+          letterSpacing: xStudioTokens.typeScale.titleSmall.letterSpacing,
+          color: xStudioTokens.color.onSurfaceVariant,
           transition: 'background-color 200ms ease-in-out',
-          borderTopLeftRadius: m3Tokens.shape.small,
-          borderTopRightRadius: m3Tokens.shape.small,
+          borderTopLeftRadius: xStudioTokens.shape.small,
+          borderTopRightRadius: xStudioTokens.shape.small,
           '&.Mui-selected': {
-            color: m3Tokens.color.primary,
+            color: xStudioTokens.color.primary,
           },
           '&:hover': {
-            backgroundColor: `rgba(103, 80, 164, ${m3Tokens.stateLayer.hover})`,
+            backgroundColor: `rgba(90, 75, 254, ${xStudioTokens.stateLayer.hover})`,
           },
         },
       },
@@ -308,8 +323,8 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: m3Tokens.color.surface,
-          color: m3Tokens.color.onSurface,
+          backgroundColor: xStudioTokens.color.surface,
+          color: xStudioTokens.color.onSurface,
           boxShadow: 'none',
         },
       },
@@ -319,15 +334,15 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: m3Tokens.shape.extraSmall,    // 4px
+          borderRadius: xStudioTokens.shape.extraSmall,
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: m3Tokens.color.outline,
+            borderColor: xStudioTokens.color.outline,
           },
           '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: m3Tokens.color.onSurface,
+            borderColor: xStudioTokens.color.onSurface,
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: m3Tokens.color.primary,
+            borderColor: xStudioTokens.color.primary,
             borderWidth: 2,
           },
         },
@@ -338,7 +353,7 @@ const theme = createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          borderRadius: m3Tokens.shape.extraLarge,  // 28px
+          borderRadius: xStudioTokens.shape.extraLarge,
           padding: 8,
         },
       },
@@ -348,14 +363,14 @@ const theme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: m3Tokens.shape.small,       // 8px
+          borderRadius: xStudioTokens.shape.small,
           fontWeight: 500,
-          fontSize: m3Tokens.typeScale.labelSmall.fontSize,
-          letterSpacing: m3Tokens.typeScale.labelSmall.letterSpacing,
+          fontSize: xStudioTokens.typeScale.labelSmall.fontSize,
+          letterSpacing: xStudioTokens.typeScale.labelSmall.letterSpacing,
           height: 28,
         },
         outlined: {
-          borderColor: m3Tokens.color.outline,
+          borderColor: xStudioTokens.color.outline,
         },
       },
     },
@@ -364,11 +379,11 @@ const theme = createTheme({
     MuiAccordion: {
       styleOverrides: {
         root: {
-          borderRadius: `${m3Tokens.shape.medium}px !important`,
+          borderRadius: `${xStudioTokens.shape.medium}px !important`,
           '&:before': { display: 'none' },
           boxShadow: 'none',
-          border: `1px solid ${m3Tokens.color.outlineVariant}`,
-          backgroundColor: m3Tokens.color.surfaceContainerLow,
+          border: `1px solid ${xStudioTokens.color.outlineVariant}`,
+          backgroundColor: xStudioTokens.color.surfaceContainerLow,
         },
       },
     },
@@ -377,17 +392,22 @@ const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          borderRadius: `${m3Tokens.shape.large}px 0 0 ${m3Tokens.shape.large}px`,
-          backgroundColor: m3Tokens.color.surfaceContainerLow,
+          borderRadius: `${xStudioTokens.shape.large}px 0 0 ${xStudioTokens.shape.large}px`,
+          backgroundColor: xStudioTokens.color.surfaceContainerLow,
         },
       },
     },
 
-    // --- Switch ---
+    // --- Switch — Accent teal (#00beb4) ---
     MuiSwitch: {
       styleOverrides: {
-        root: {
-          // M3 switch proportions
+        switchBase: {
+          '&.Mui-checked': {
+            color: xStudioTokens.color.tertiary,
+          },
+          '&.Mui-checked + .MuiSwitch-track': {
+            backgroundColor: xStudioTokens.color.tertiary,
+          },
         },
       },
     },
@@ -396,10 +416,10 @@ const theme = createTheme({
     MuiListItemButton: {
       styleOverrides: {
         root: {
-          borderRadius: m3Tokens.shape.full,
+          borderRadius: xStudioTokens.shape.full,
           transition: 'background-color 200ms ease-in-out',
           '&:hover': {
-            backgroundColor: `rgba(103, 80, 164, ${m3Tokens.stateLayer.hover})`,
+            backgroundColor: `rgba(90, 75, 254, ${xStudioTokens.stateLayer.hover})`,
           },
         },
       },
@@ -409,8 +429,8 @@ const theme = createTheme({
     MuiStepLabel: {
       styleOverrides: {
         label: {
-          fontSize: m3Tokens.typeScale.labelMedium.fontSize,
-          fontWeight: m3Tokens.typeScale.labelMedium.fontWeight,
+          fontSize: xStudioTokens.typeScale.labelMedium.fontSize,
+          fontWeight: xStudioTokens.typeScale.labelMedium.fontWeight,
         },
       },
     },
@@ -431,7 +451,7 @@ const theme = createTheme({
     MuiDivider: {
       styleOverrides: {
         root: {
-          borderColor: m3Tokens.color.outlineVariant,
+          borderColor: xStudioTokens.color.outlineVariant,
         },
       },
     },
@@ -440,7 +460,7 @@ const theme = createTheme({
     MuiAlert: {
       styleOverrides: {
         root: {
-          borderRadius: m3Tokens.shape.medium,
+          borderRadius: xStudioTokens.shape.medium,
         },
       },
     },
@@ -449,10 +469,10 @@ const theme = createTheme({
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          backgroundColor: m3Tokens.color.inverseSurface,
-          color: m3Tokens.color.inverseOnSurface,
-          borderRadius: m3Tokens.shape.extraSmall,
-          fontSize: m3Tokens.typeScale.bodySmall.fontSize,
+          backgroundColor: xStudioTokens.color.inverseSurface,
+          color: xStudioTokens.color.inverseOnSurface,
+          borderRadius: xStudioTokens.shape.extraSmall,
+          fontSize: xStudioTokens.typeScale.bodySmall.fontSize,
         },
       },
     },
@@ -460,6 +480,6 @@ const theme = createTheme({
 });
 
 // Attach raw tokens to theme for direct access in sx props: theme.m3.color.primary, etc.
-theme.m3 = m3Tokens;
+theme.m3 = xStudioTokens;
 
 export default theme;

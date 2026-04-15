@@ -121,7 +121,7 @@ export default function MCPsTab({ agent }) {
                     </Box>
                   )}
                 </Box>
-                <Switch checked={true} onChange={() => handleToggle(globalMcp)} color="primary" />
+                <Switch checked={true} onChange={() => handleToggle(globalMcp)} color="info" />
               </Box>
             </Paper>
           );
@@ -142,7 +142,7 @@ export default function MCPsTab({ agent }) {
               </Box>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, ml: { lg: 'auto' } }}>
-              <Switch checked={false} onChange={() => handleToggle(globalMcp)} color="primary" />
+              <Switch checked={false} onChange={() => handleToggle(globalMcp)} color="info" />
             </Box>
           </Paper>
         ))}

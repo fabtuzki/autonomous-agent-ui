@@ -139,13 +139,13 @@ export default function CreateAgentDialog({ open, onClose }) {
                 </Box>
               )}
 
-              {/* Built-in Core Functions — M3 Tonal Card */}
+              {/* Built-in Core Functions — Tonal Card */}
               <Box
                 sx={{
                   p: 2.5,
                   borderRadius: `${m3.shape.medium}px`,
-                  backgroundColor: m3.color.secondaryContainer,
-                  color: m3.color.onSecondaryContainer,
+                  backgroundColor: m3.color.primaryContainer,
+                  color: m3.color.onPrimaryContainer,
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
@@ -156,9 +156,9 @@ export default function CreateAgentDialog({ open, onClose }) {
                   These universal tools are natively embedded into the agent runtime and do not need to be manually configured.
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                  <Chip label="Scheduler" size="small" variant="outlined" sx={{ borderColor: m3.color.onSecondaryContainer, color: m3.color.onSecondaryContainer }} />
-                  <Chip label="File System Writer" size="small" variant="outlined" sx={{ borderColor: m3.color.onSecondaryContainer, color: m3.color.onSecondaryContainer }} />
-                  <Chip label="Web Serper" size="small" variant="outlined" sx={{ borderColor: m3.color.onSecondaryContainer, color: m3.color.onSecondaryContainer }} />
+                  <Chip label="Scheduler" size="small" variant="outlined" sx={{ borderColor: m3.color.onPrimaryContainer, color: m3.color.onPrimaryContainer }} />
+                  <Chip label="File System Writer" size="small" variant="outlined" sx={{ borderColor: m3.color.onPrimaryContainer, color: m3.color.onPrimaryContainer }} />
+                  <Chip label="Web Serper" size="small" variant="outlined" sx={{ borderColor: m3.color.onPrimaryContainer, color: m3.color.onPrimaryContainer }} />
                 </Box>
               </Box>
             </Box>

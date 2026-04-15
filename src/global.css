@@ -1,0 +1,44 @@
+/* ============================================================================
+   xStudio — Global Styles
+   Matches AI Studio's global.less / tailwind.css baseline
+   ============================================================================ */
+
+/* Font feature settings (AI Studio: body { font-feature-settings: 'rlig' 1, 'calt' 1 }) */
+body {
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Scrollbar — matching AI Studio's 10px global scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.4);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.7);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color matching brand purple */
+::selection {
+  background-color: rgba(90, 75, 254, 0.2);
+  color: #1A1A1A;
+}
