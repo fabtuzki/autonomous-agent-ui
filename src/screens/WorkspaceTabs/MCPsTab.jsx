@@ -37,7 +37,7 @@ export default function MCPsTab({ agent }) {
   };
 
   // Shared list-item styling
-  const listItemSx = (isInstalled, hasCreds) => ({
+  const listItemSx = (isInstalled, hasCreds, requiresToken = true) => ({
     width: '100%',
     display: 'flex',
     flexDirection: { xs: 'column', lg: 'row' },
@@ -46,10 +46,10 @@ export default function MCPsTab({ agent }) {
     p: 2,
     borderRadius: `${m3.shape.medium}px`,
     backgroundColor: isInstalled
-      ? (hasCreds ? m3.color.surfaceContainerLowest : m3.color.warningContainer + '1A')
+      ? ((hasCreds || !requiresToken) ? m3.color.surfaceContainerLowest : m3.color.warningContainer + '1A')
       : m3.color.surfaceContainerHigh,
     border: `1px solid ${isInstalled
-      ? (hasCreds ? m3.color.successContainer : m3.color.warningContainer)
+      ? ((hasCreds || !requiresToken) ? m3.color.successContainer : m3.color.warningContainer)
       : m3.color.outlineVariant}`,
     transition: 'all 200ms ease-in-out',
     gap: 2,
@@ -76,7 +76,7 @@ export default function MCPsTab({ agent }) {
           const hasCreds = installedInstance.hasCredentials;
 
           return (
-            <Paper key={globalMcp.id} elevation={0} sx={listItemSx(true, hasCreds)}>
+            <Paper key={globalMcp.id} elevation={0} sx={listItemSx(true, hasCreds, globalMcp.requiresToken !== false)}>
               <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexGrow: 1, maxWidth: { lg: '55%' } }}>
                 <Box sx={{ p: 1, borderRadius: `${m3.shape.small}px`, backgroundColor: m3.color.surfaceContainerLowest, display: 'flex' }}>
                   <ExtensionIcon sx={{ color: m3.color.primary }} />
@@ -89,7 +89,14 @@ export default function MCPsTab({ agent }) {
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, ml: { lg: 'auto' }, width: { xs: '100%', lg: 'auto' }, justifyContent: { xs: 'space-between', lg: 'flex-end' } }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                  {hasCreds ? (
+                  {globalMcp.requiresToken === false ? (
+                    <Chip
+                      icon={<CheckCircleIcon sx={{ fontSize: '16px !important' }} />}
+                      label="Ready to Use"
+                      size="small"
+                      sx={{ backgroundColor: m3.color.successContainer, color: m3.color.onSuccessContainer, fontWeight: 500, border: 'none' }}
+                    />
+                  ) : hasCreds ? (
                     <Chip
                       icon={<CheckCircleIcon sx={{ fontSize: '16px !important' }} />}
                       label="Token Applied"

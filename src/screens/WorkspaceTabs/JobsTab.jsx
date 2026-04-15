@@ -80,7 +80,7 @@ function JobRow({ job, onDelete }) {
                 <Typography variant="body2" sx={{ fontWeight: 500, color: m3.color.onSurface }}>{formatDate(job.endTime)}</Typography>
               </Box>
               <Box>
-                <Typography variant="caption" sx={{ color: m3.color.onSurfaceVariant, display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.5 }}><AccessTimeIcon fontSize="inherit" /> Duration</Typography>
+                <Typography variant="caption" sx={{ color: m3.color.onSurfaceVariant, display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.5 }}><AccessTimeIcon fontSize="inherit" /> Frequency</Typography>
                 <Typography variant="body2" sx={{ fontWeight: 500, color: m3.color.onSurface }}>{job.duration || '--'}</Typography>
               </Box>
             </Box>

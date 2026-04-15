@@ -66,18 +66,18 @@ export const DataProvider = ({ children }) => {
 
   // Global Available MCPs list
   const availableMCPs = [
-    { id: 'mcp-github', name: 'GitHub Integration', description: 'Interact with repositories and PRs.', type: 'mcp' },
-    { id: 'mcp-slack', name: 'Slack Integration', description: 'Read and send messages in Slack workspaces.', type: 'mcp' },
-    { id: 'mcp-postgres', name: 'PostgreSQL Tool', description: 'Run secure queries against a replicated DB.', type: 'mcp', authType: 'database' },
-    { id: 'mcp-jira', name: 'Jira Software', description: 'Access ticketing systems.', type: 'mcp' },
-    { id: 'mcp-linear', name: 'Linear App', description: 'Manage Linear issues.', type: 'mcp' },
-    { id: 'mcp-datadog', name: 'Datadog Metrics', description: 'Fetch system health and metrics.', type: 'mcp' },
-    { id: 'mcp-aws', name: 'AWS CLI wrapper', description: 'Manage cloud resources securely.', type: 'mcp' },
-    { id: 'mcp-google-drive', name: 'Google Drive', description: 'Access and parse documents.', type: 'mcp' },
-    { id: 'mcp-notion', name: 'Notion Workspace', description: 'Read and write to Notion databases.', type: 'mcp' },
-    { id: 'mcp-figma', name: 'Figma Comments', description: 'Read design comments.', type: 'mcp' },
-    { id: 'mcp-sentry', name: 'Sentry Error Log', description: 'Read application errors.', type: 'mcp' },
-    { id: 'mcp-stripe', name: 'Stripe Analytics', description: 'Read financial analytics.', type: 'mcp' }
+    { id: 'mcp-github', name: 'GitHub Integration', description: 'Interact with repositories and PRs.', type: 'mcp', requiresToken: true },
+    { id: 'mcp-slack', name: 'Slack Integration', description: 'Read and send messages in Slack workspaces.', type: 'mcp', requiresToken: true },
+    { id: 'mcp-postgres', name: 'PostgreSQL Tool', description: 'Run secure queries against a replicated DB.', type: 'mcp', authType: 'database', requiresToken: true },
+    { id: 'mcp-jira', name: 'Jira Software', description: 'Access ticketing systems.', type: 'mcp', requiresToken: true },
+    { id: 'mcp-filesystem', name: 'Filesystem', description: 'Read and write files on the local filesystem.', type: 'mcp', requiresToken: false },
+    { id: 'mcp-brave-search', name: 'Brave Search', description: 'Search the web using Brave Search API.', type: 'mcp', requiresToken: false },
+    { id: 'mcp-memory', name: 'Memory', description: 'Persistent knowledge graph for long-term memory.', type: 'mcp', requiresToken: false },
+    { id: 'mcp-google-drive', name: 'Google Drive', description: 'Access and parse documents.', type: 'mcp', requiresToken: true },
+    { id: 'mcp-notion', name: 'Notion Workspace', description: 'Read and write to Notion databases.', type: 'mcp', requiresToken: true },
+    { id: 'mcp-figma', name: 'Figma Comments', description: 'Read design comments.', type: 'mcp', requiresToken: true },
+    { id: 'mcp-sentry', name: 'Sentry Error Log', description: 'Read application errors.', type: 'mcp', requiresToken: true },
+    { id: 'mcp-fetch', name: 'Fetch', description: 'Fetch and extract content from any URL.', type: 'mcp', requiresToken: false },
   ];
 
   const availableSkills = [
